@@ -3,9 +3,12 @@ import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 from flask import Flask
+import os
 
 server = Flask(__name__)
+server.secret_key = os.environ.get('secret_key', 'secret')
 app = dash.Dash(name = __name__, server = server)
+app.config.supress_callback_exceptions = True
 
 app.layout = html.Div(children=[
     html.H1(children='Hello Dash'),
